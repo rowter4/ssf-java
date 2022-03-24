@@ -3,12 +3,14 @@ package vttp2022.nus.iss.currency.model;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
+import jakarta.json.JsonValue;
 
 public class Currency {
 
@@ -75,6 +77,24 @@ public class Currency {
         }
 
         return currencyList;
+    }
+
+
+    public static Double convert(String json) throws IOException {
+
+        Double conversionRate2 = (double) 0;
+
+        try(InputStream is = new ByteArrayInputStream(json.getBytes())) {
+            JsonReader r = Json.createReader(is);
+            JsonObject o = r.readObject();
+            Collection<JsonValue> values = o.values();
+
+            for (JsonValue value: values) {
+                conversionRate2 = Double.parseDouble(value.toString());
+            }
+
+        }
+        return conversionRate2;
     }
 
     

@@ -20,7 +20,8 @@
             <div class="row mt-5">
                 <div class="col">
                     <!-- <h1> Testing currency </h1> -->
-                    <form method="post" action="/convert">
+                    <form method="GET" action="/convert">  
+                        <!-- The data in the list is able to be populated from the get call and need not to have the post call -->
                         FROM: <select name="from_currency">
                             <option 
                                 data-th-each="i: ${currencies}"
